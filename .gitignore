@@ -1,0 +1,5 @@
+# Ignore compiled binaries
+myfetch-core
+
+# Ignore standard C object files
+*.o
