@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# 1. Generate the static stats file natively (keeping the colors intact)
+fastfetch --logo none --structure-disabled uptime:memory:swap --pipe false > /tmp/myfetch_stats.txt
+
+# 2. Run our custom 3D renderer in an infinite loop
+myfetch-core --infinite
+
+# 3. Once the user exits the 3D renderer, print the standard fastfetch to the terminal
+fastfetch
