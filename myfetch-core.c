@@ -2410,6 +2410,11 @@ if (show_info) {
         if (strstr(line_buf, "Swap")) field_line[F_SWAP] = fetch_line_count;
 
         add_line(line_buf);
+
+        // Force a blank line after the GPU
+        if (strstr(line_buf, "GPU")) {
+            add_line("");
+        }
       }
       fclose(fp);
 

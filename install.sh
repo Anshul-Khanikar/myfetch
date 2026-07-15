@@ -16,10 +16,14 @@ echo "=> 2/4 Compiling myfetch-core..."
 gcc -O3 myfetch-core.c -o myfetch-core -lm
 
 echo "=> 3/4 Installing globally (requires sudo)..."
+# Safely kill any running instances to prevent 'Text file busy' errors
+sudo killall myfetch-core 2>/dev/null || true
+
 sudo cp myfetch-core /usr/local/bin/
 sudo cp myfetch /usr/local/bin/
 sudo chmod +x /usr/local/bin/myfetch
 sudo chmod +x /usr/local/bin/myfetch-core
+
 
 echo "=> 4/4 Setting up user config directories..."
 mkdir -p ~/.config/myfetch
