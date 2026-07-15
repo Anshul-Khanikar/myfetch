@@ -2412,10 +2412,20 @@ if (show_info) {
         add_line(line_buf);
       }
       fclose(fp);
+
+      // Immediately overwrite the static Fastfetch lines with our dynamic ones
+      is_refresh_pass = 1;
+      if (field_line[F_UPTIME] >= 0) { current_field = F_UPTIME; gather_uptime(); }
+      if (field_line[F_MEMORY] >= 0) { current_field = F_MEMORY; gather_memory(); }
+      if (field_line[F_SWAP] >= 0) { current_field = F_SWAP; gather_swap(); }
+      current_field = -1;
+      is_refresh_pass = 0;
+
     } else {
       add_line("\033[1;31mError\033[0m: Could not read /tmp/myfetch_stats.txt");
     }
   }
+
   // Set render height: config/flag override > auto-fit to info lines > default
   if (config_height > 0) {
     render_height = config_height;
